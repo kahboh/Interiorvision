@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interior Vision</title>
+</head>
+<body>
+
+<h1>Interior Design Projects</h1>
+
+<div id="projects">Loading...</div>
+
+<script>
+fetch("http://localhost:3000/api/projects")
+  .then(response => response.json())
+  .then(data => {
+    let output = "";
+
+    data.forEach(project => {
+      output += `
+        <div>
+          <h3>${project.title}</h3>
+          <p>Style: ${project.style}</p>
+        </div>
+      `;
+    });
+
+    document.getElementById("projects").innerHTML = output;
+  })
+  .catch(error => {
+    document.getElementById("projects").innerHTML =
+      "Failed to load data";
+  });
+</script>
+
+</body>
+</html>
